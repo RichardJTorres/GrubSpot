@@ -14,7 +14,7 @@
     <div class="span12">
         <div class="row">
             <div class="span12">
-                <h2>${eateryInstance.name}</h2>
+                <h2 id="title">${eateryInstance.name}</h2>
             </div>
         </div>
         <div class="row">
