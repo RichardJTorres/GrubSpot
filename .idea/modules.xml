@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GrubSpot.iml" filepath="$PROJECT_DIR$/GrubSpot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GrubSpot-grailsPlugins.iml" filepath="$PROJECT_DIR$/GrubSpot-grailsPlugins.iml" />
+    </modules>
+  </component>
+</project>
+
