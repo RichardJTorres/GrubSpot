@@ -7,8 +7,11 @@ class Location {
 	Integer zip
 
 	static belongsTo = [eatery: Eatery]
+    static constraints = {
+//        state size: 2..2
+    }
 
 	public String toString() {
-		return street + ' ' +  city + ' ' + state + ' ' + zip
+		return street + ' ' +  city + ' ' + state + ', ' + zip
 	}
 }
