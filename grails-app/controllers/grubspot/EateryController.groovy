@@ -23,6 +23,15 @@ class EateryController {
         eateryInstance.name = params['name']
         eateryInstance.phone = params['phone']
 
+        //assign comma delimited tags
+        String tagString = params['tags']
+        def tagList = tagString.split(',')
+        for (t in tagList){
+            t.trim()
+            def tag = new Tag(tagName: t)
+            eateryInstance.addToTags(tag)
+        }
+
         //relate eatery and location
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance
