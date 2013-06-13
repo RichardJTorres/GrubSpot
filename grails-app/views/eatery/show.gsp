@@ -35,11 +35,23 @@
                     %{--Eatery Location--}%
                     <g:if test="${eateryInstance.location}">
                     <div class="control-group">
-                        <label class="control-label" for="phone">Location:</label>
+                        <label class="control-label" for="location">Location:</label>
                         <div class="controls">
                             <span id="address" class="input-large uneditable-input">${eateryInstance?.location?.encodeAsHTML()}</span>
                         </div>
                     </div>
+                    </g:if>
+                    <g:if test="${eateryInstance.tags}">
+                        <div class="control-group">
+                            <label class="control-label" for="tags">Tags:</label>
+                            <div class="controls">
+                                <span class="input-large uneditable-input">
+                                    <g:each in="${eateryInstance?.tags}">
+                                    ${eateryInstance?.tags?.tagName?.encodeAsHTML()}
+                                    </g:each>
+                                </span>
+                            </div>
+                        </div>
                     </g:if>
                 </div>
             </div>

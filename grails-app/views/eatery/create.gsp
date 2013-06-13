@@ -53,6 +53,14 @@
                             <g:textField name="location.zip" value="${eateryInstance?.location?.zip}"/>
                         </div>
                     </div>
+                    %{--Tags--}%
+                    <div class="control-group">
+                        <label class="control-label" for="tags">Tags:</label>
+                        <div class="controls">
+                            <g:textField name="tags" value="${eateryInstance?.tags}"/>
+                            <p class="help-block"><small>Separate tags with a comma.</small></p>
+                        </div>
+                    </div>
                     %{--Form Controls--}%
                     <div class="form-actions">
                         <g:submitButton name="create" class="btn btn-primary" value="Create"/>

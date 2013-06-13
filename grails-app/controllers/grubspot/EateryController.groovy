@@ -28,8 +28,7 @@ class EateryController {
         def tagList = tagString.split(',')
         for (t in tagList){
             t.trim()
-            def tag = new Tag(tagName: t)
-            eateryInstance.addToTags(tag)
+            eateryInstance.tags = new Tag(tagName: t)
         }
 
         //relate eatery and location

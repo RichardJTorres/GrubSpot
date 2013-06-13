@@ -4,6 +4,7 @@ class Eatery {
     String name
     String phone
     Date lastVisited
+    Tag tags
     static hasOne = [location: Location]
     static hasMany = [tags: Tag];
     static constraints = {
