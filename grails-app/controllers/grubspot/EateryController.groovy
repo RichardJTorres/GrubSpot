@@ -1,7 +1,7 @@
 package grubspot
 
 class EateryController {
-
+    RandomizerService randomizerService
     def index() {
         redirect(action: "create", params: params)
     }
@@ -25,8 +25,8 @@ class EateryController {
 
         //assign comma delimited tags
         String tagString = params['tags']
-        def tagList = tagString.split(',')
-        for (t in tagList){
+        String[] tagList = tagString.split(',')
+        for (String t in tagList){
             t.trim()
             eateryInstance.tags = new Tag(tagName: t)
         }
@@ -47,10 +47,21 @@ class EateryController {
 
     def show(Long id) {
         def eateryInstance = Eatery.get(id)
-        if (!eateryInstance) {
+        if (eateryInstance == null) {
             flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
         }
         render(view:'show', model: [eateryInstance: eateryInstance])
+    }
+
+    def randomizer() {
+        List<Tag> tagList = Tag.list()
+        render(view:'randomizer', model: [tagList: tagList])
+    }
+
+    def randomize(){
+        List<Tag> tagList = new ArrayList<Tag>(params.values())
+        Eatery randomEatery = randomizerService.getRandomEatery(tagList)
+        redirect(action: "show", id: randomEatery.id)
     }
 
     }

@@ -41,13 +41,14 @@
                         </div>
                     </div>
                     </g:if>
+                    %{--Eatery Tags--}%
                     <g:if test="${eateryInstance.tags}">
                         <div class="control-group">
                             <label class="control-label" for="tags">Tags:</label>
                             <div class="controls">
                                 <span class="input-large uneditable-input">
-                                    <g:each in="${eateryInstance?.tags}">
-                                    ${eateryInstance?.tags?.tagName?.encodeAsHTML()}
+                                    <g:each in="${eateryInstance?.getTags()}">
+                                        ${it.tagName?.encodeAsHTML()}
                                     </g:each>
                                 </span>
                             </div>

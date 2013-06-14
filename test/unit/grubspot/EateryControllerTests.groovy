@@ -22,5 +22,6 @@ class EateryControllerTests {
             t.trim()
             eateryInstance.tags = new Tag(tagName: t)
         }
+
     }
 }
