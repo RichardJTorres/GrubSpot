@@ -20,8 +20,8 @@
                 <div class="container">
                     <a class="brand" href="#">Place Pick</a>
                     <ul class="nav">
-                        <li><a href="#">Eateries</a></li>
-                        <li><a href="#">Randomizer</a></li>
+                        <li><g:link controller="eatery" action="create">Eateries</g:link></li>
+                        <li><g:link controller="eatery" action="randomizer">Randomizer</g:link></li>
                     </ul>
                 </div>
             </div>

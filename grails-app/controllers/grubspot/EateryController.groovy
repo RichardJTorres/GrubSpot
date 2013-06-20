@@ -27,7 +27,7 @@ class EateryController {
         String tagString = params['tags']
         String[] tagList = tagString.split(',')
         for (String t in tagList){
-            t.trim()
+            t.trim().toLowerCase()
             eateryInstance.tags = new Tag(tagName: t)
         }
 
@@ -63,5 +63,4 @@ class EateryController {
         Eatery randomEatery = randomizerService.getRandomEatery(tagList)
         redirect(action: "show", id: randomEatery.id)
     }
-
-    }
+}
