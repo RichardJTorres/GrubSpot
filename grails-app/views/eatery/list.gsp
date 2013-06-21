@@ -7,7 +7,12 @@
 <body>
 <div class="row">
     <div class="span8">
-        <legend>Eatery List</legend>
+        <h1>Eatery List</h1>
+        <g:if test="${flash.message}">
+            <div class="alert alert-info">
+                ${flash.message}
+            </div>
+        </g:if>
         <div class="btn-toolbar">
             <g:link class="btn btn-small btn-primary" action="create">New Eatery</g:link>
         </div>
