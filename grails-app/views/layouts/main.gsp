@@ -18,9 +18,9 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="#">Place Pick</a>
+                    <a class="brand" href="/GrubSpot">Place Pick</a>
                     <ul class="nav">
-                        <li><g:link controller="eatery" action="create">Eateries</g:link></li>
+                        <li><g:link controller="eatery" action="list">Eateries</g:link></li>
                         <li><g:link controller="eatery" action="randomizer">Randomizer</g:link></li>
                     </ul>
                 </div>

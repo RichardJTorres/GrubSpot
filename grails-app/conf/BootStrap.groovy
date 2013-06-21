@@ -34,12 +34,6 @@ class BootStrap {
         //save eateries
         eatery1.save(flush: true)
         eatery2.save(flush: true)
-
-
-
-
-
-
     }
     def destroy = {
     }

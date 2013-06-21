@@ -18,8 +18,9 @@
         <g:form action="randomize">
         <g:each in="${tagList}">
             <lablel class="checkbox">
-            <g:checkBox name="${it.tagName}"/>${it.tagName.toString()}
+            <g:checkBox name="tagName" value="${it.tagName}"/>${it.tagName.toString()}
             </lablel>
+            </br>
         </g:each>
         <g:submitButton name="randomize" class="btn btn-primary" value= "Randomize!"/>
         </g:form>
