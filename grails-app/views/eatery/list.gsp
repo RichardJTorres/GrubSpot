@@ -9,8 +9,8 @@
     <div class="span8">
         <h1>Eatery List</h1>
         <g:if test="${flash.message}">
-            <div class="alert alert-info">
-                ${flash.message}
+            <div class="alert">
+                ${flash.message} <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         </g:if>
         <div class="btn-toolbar">

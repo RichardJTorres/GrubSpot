@@ -9,6 +9,6 @@ class Tag {
     static hasMany = [eaterys: Eatery]
 
     public String toString(){
-        return tagName
+        return id + ", " + tagName
     }
 }

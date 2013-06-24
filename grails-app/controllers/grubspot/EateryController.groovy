@@ -62,9 +62,19 @@ class EateryController {
     }
 
     def edit(Long id) {
+        Eatery eateryInstance = Eatery.get(id)
+        if(!eateryInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label'), id])
+            redirect(action: "list")
+            return
+        }
+        [eateryInstance: eateryInstance]
+    }
+
+    def update(Long id) {
         def eateryInstance = Eatery.get(id)
         if (!eateryInstance) {
-            flash.message = message(code: 'default.not.found.message', arg: [message(code: 'eatery.label', default: 'Eatery'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
             redirect(action: "list")
             return
         }
@@ -84,6 +94,7 @@ class EateryController {
         }
 
         flash.message = message(code:"default.updated.message", args: [message(code: 'eatery.label', default: 'Tag'), eateryInstance.id])
+        redirect(action: "show", id: eateryInstance.id)
     }
 
     def randomizer() {
@@ -95,7 +106,9 @@ class EateryController {
 
         List<String> tagNameList = params.list('tagName')
         List<Tag> tagList = Tag.findAllByTagNameInList(tagNameList)
-//        tagList.add(Tag.findAllByTagNameInList(params.list('tagName')))
+        if (!tagList) {
+            tagList = Tag.list()
+        }
         Eatery randomEatery = randomizerService.getRandomEatery(tagList)
         redirect(action: "show", id: randomEatery.id)
     }
