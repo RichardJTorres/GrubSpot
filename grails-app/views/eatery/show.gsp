@@ -16,6 +16,14 @@
             <div class="span12">
                 <h2 id="title">${eateryInstance.name}</h2>
             </div>
+
+        </div>
+        <div class="row">
+            <div class="span7">
+                <div class="alert">
+                    ${flash.message} <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="span3">

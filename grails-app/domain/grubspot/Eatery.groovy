@@ -10,8 +10,8 @@ class Eatery {
     static hasMany = [tags: Tag];
     static constraints = {
         name nullable: false, blank: false, unique: true
-        phone nullable: true, blank: true, unique: true
-        location nullable: true, blank: true, unique: true
+        phone nullable: true, blank: true
+        location nullable: true, blank: true
         tags nullable: true, blank: true
         //lastVisited nullable: true, blank: true
     }

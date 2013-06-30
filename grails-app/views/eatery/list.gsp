@@ -36,8 +36,8 @@
                             ${t.tagName} &nbsp
                         </g:each>
                     </td>
-                    <td><g:link action="edit"><i class="icon-pencil"></i></g:link>
-                        <g:link action="delete"><i class="icon-remove"></i></g:link>
+                    <td><g:link action="edit" id="${eateryInstance.id}"><i class="icon-pencil"></i></g:link>
+                        <g:link action="delete" id="${eateryInstance.id}"><i class="icon-remove"></i></g:link>
                     </td>
                 </tr>
             </g:each>

@@ -62,7 +62,7 @@ class EateryController {
     }
 
     def edit(Long id) {
-        Eatery eateryInstance = Eatery.get(id)
+        def eateryInstance = Eatery.get(id)
         if(!eateryInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label'), id])
             redirect(action: "list")
@@ -71,7 +71,7 @@ class EateryController {
         [eateryInstance: eateryInstance]
     }
 
-    def update(Long id) {
+    def update(Long id, Long version) {
         def eateryInstance = Eatery.get(id)
         if (!eateryInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
@@ -79,16 +79,43 @@ class EateryController {
             return
         }
 
-//        if (version != null) {
-//            if(eateryInstance.version > version) {
-//                eateryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-//                [message(code: 'eatery.label')])
-//            }
-//        }
+        if (version != null) {
+            if(eateryInstance.version > version) {
+                eateryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                [message(code: 'eatery.label', default: 'Eatery')] as Object[], "Another user has updated this Eatery while you were editing")
+                render(view: "edit", model: [eateryInstance: eateryInstance])
+                return
+            }
+        }
 
-        eateryInstance.properties = params
+        eateryInstance.name = params['name']
+        eateryInstance.phone = params['phone']
 
-        if (!eateryInstance.save(flush: true)) {
+        //edit a location
+        Location locationInstance = eateryInstance.getLocation()
+        locationInstance.street = params['location.street']
+        locationInstance.city = params['location.city']
+        locationInstance.state = params['location.state']
+        locationInstance.zip = Integer.parseInt(params['location.zip'].toString())
+        locationInstance.save()
+
+
+        //assign comma delimited tags
+        String tagString = params['tags']
+        String[] tagList = tagString.split(',')
+        List<Tag> tags = new ArrayList<>()
+        for (String t in tagList){
+            t.trim().toLowerCase()
+            tags.add(Tag.findByTagName(t) ?: new Tag(tagName: t).save(flush: true))
+
+        }
+        eateryInstance.tags = tags
+
+        //relate eatery and location
+        eateryInstance.location = locationInstance
+        locationInstance.eatery = eateryInstance
+
+        if (!eateryInstance.save()) {
             render(view:"edit", model: [eateryInstance: eateryInstance])
             return
         }

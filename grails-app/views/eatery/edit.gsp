@@ -1,4 +1,5 @@
 
+<%@  page import="grubspot.Eatery" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -8,7 +9,9 @@
 <body>
 <div class="row">
     <div class="span12">
-        <g:form action="update" class="form-horizontal">
+        <g:form method="post" class="form-horizontal">
+            <g:hiddenField name="id" value="${eateryInstance.id}" />
+            <g:hiddenField name="version" value="${eateryInstance.version}" />
             <fieldset>
                 <legend>Edit an Eatery</legend>
                 %{--Eatery Name--}%
@@ -64,8 +67,8 @@
                 </div>
                 %{--Form Controls--}%
                 <div class="form-actions">
-                    <g:submitButton name="update" action="update" class="btn btn-primary" value="Update"/>
-                    <g:submitButton name="delete" action="delete" class="btn btn-danger" value="Delete"/>
+                    <g:actionSubmit action="update" class="btn btn-primary" value="Update"/>
+                    <g:actionSubmit action="delete" class="btn btn-danger" value="Delete"/>
                 </div>
             </fieldset>
         </g:form>
