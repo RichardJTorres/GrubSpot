@@ -1,5 +1,7 @@
 package grubspot
 
+import org.springframework.dao.DataIntegrityViolationException
+
 class EateryController {
     RandomizerService randomizerService
     def index() {
@@ -123,6 +125,26 @@ class EateryController {
         flash.message = message(code:"default.updated.message", args: [message(code: 'eatery.label', default: 'Tag'), eateryInstance.id])
         redirect(action: "show", id: eateryInstance.id)
     }
+
+    def delete(Long id) {
+        def eateryInstance = Eatery.get(id)
+        if (!eateryInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
+            redirect(action: "list")
+            return
+        }
+
+        try {
+            eateryInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
+            redirect(action: "list")
+        }
+        catch(DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
+            redirect(action: "show", id: id)
+        }
+    }
+
 
     def randomizer() {
         List<Tag> tagList = Tag.list()

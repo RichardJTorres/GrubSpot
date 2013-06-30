@@ -37,7 +37,7 @@
                         </g:each>
                     </td>
                     <td><g:link action="edit" id="${eateryInstance.id}"><i class="icon-pencil"></i></g:link>
-                        <g:link action="delete" id="${eateryInstance.id}"><i class="icon-remove"></i></g:link>
+                        <g:link action="delete" id="${eateryInstance.id}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" ><i class="icon-remove"></i></g:link>
                     </td>
                 </tr>
             </g:each>
