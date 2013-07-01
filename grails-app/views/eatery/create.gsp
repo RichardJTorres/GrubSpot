@@ -43,7 +43,7 @@
                         <label class="control-label" for="location.state">State:</label>
                         <div class="controls">
                             <g:textField name="location.state" value="${eateryInstance?.location?.state}"/>
-                            <p class="help-block">Use two character state code. Ex: CA for California</p>
+                            <p class="help-block"><small>Use two character state code. Ex: CA for California</small></p>
                         </div>
                     </div>
                     %{--Location Zip--}%

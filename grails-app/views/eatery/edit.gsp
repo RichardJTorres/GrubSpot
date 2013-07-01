@@ -61,7 +61,7 @@
                 <div class="control-group">
                     <label class="control-label" for="tags">Tags:</label>
                     <div class="controls">
-                        <g:textField name="tags" value="${eateryInstance?.tags.tagName.join(", ")}"/>
+                        <g:textField name="tags" value="${eateryInstance?.tags.tagName.join(",")}"/>
                         <p class="help-block"><small>Separate tags with a comma.</small></p>
                     </div>
                 </div>

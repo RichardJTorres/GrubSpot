@@ -16,8 +16,8 @@
             <div class="span12">
                 <h2 id="title">${eateryInstance.name}</h2>
             </div>
-
         </div>
+        <g:if test="${flash.message}" >
         <div class="row">
             <div class="span7">
                 <div class="alert">
@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        </g:if>
         <div class="row">
             <div class="span3">
                 <div id="map-canvas"></div>
@@ -34,7 +35,7 @@
                     %{--Eatery Phone--}%
                     <g:if test="${eateryInstance.phone}">
                     <div class="control-group">
-                        <label class="control-label" for="name">Eatery Phone:</label>
+                        <label class="control-label" >Eatery Phone:</label>
                         <div class="controls">
                             <span class="input-large uneditable-input">${eateryInstance.phone}</span>
                         </div>
@@ -43,7 +44,7 @@
                     %{--Eatery Location--}%
                     <g:if test="${eateryInstance.location}">
                     <div class="control-group">
-                        <label class="control-label" for="location">Location:</label>
+                        <label class="control-label" >Location:</label>
                         <div class="controls">
                             <span id="address" class="input-large uneditable-input">${eateryInstance?.location?.encodeAsHTML()}</span>
                         </div>
@@ -52,7 +53,7 @@
                     %{--Eatery Tags--}%
                     <g:if test="${eateryInstance.tags}">
                         <div class="control-group">
-                            <label class="control-label" for="tags">Tags:</label>
+                            <label class="control-label" >Tags:</label>
                             <div class="controls">
                                 <span class="input-large uneditable-input">
                                     <g:each in="${eateryInstance?.getTags()}">
@@ -62,7 +63,18 @@
                             </div>
                         </div>
                     </g:if>
+
                 </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="Row">
+        <div class="span8">
+            <div class="form-actions">
+                <g:hiddenField name="id" value="${eateryInstance?.id}" />
+                <g:actionSubmit action="delete" value="Delete" id="${eateryInstance.id}" class="btn btn-danger pull-right" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                <g:link action="edit" value="Edit" id="${eateryInstance.id}" class="btn btn-primary pull-right" >Edit</g:link>
             </div>
         </div>
     </div>
