@@ -55,10 +55,8 @@
                         <div class="control-group">
                             <label class="control-label" >Tags:</label>
                             <div class="controls">
-                                <span class="input-large uneditable-input">
-                                    <g:each in="${eateryInstance?.getTags()}">
-                                        ${it.tagName?.encodeAsHTML()}
-                                    </g:each>
+                                <input type="hidden" name="tags" class="tm-input tm-input-disabled" />
+                                <div id="tag-container"></div>
                                 </span>
                             </div>
                         </div>
@@ -82,6 +80,10 @@
 <script>
     initialize();
     codeAddress();
+    jQuery(".tm-input").tagsManager({
+        tagsContainer: $('#tag-container'),
+        prefilled: ${tagList.toString()}
+    });
 </script>
 </body>
 </html>

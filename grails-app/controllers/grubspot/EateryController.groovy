@@ -1,5 +1,6 @@
 package grubspot
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class EateryController {
@@ -16,7 +17,11 @@ class EateryController {
     }
 
     def create() {
-        render(view: "create", model: [eateryInstance: new Eatery(params)])
+        List<String> tags = new ArrayList<>()
+        for (Tag t in Tag.list()) {
+            tags.add(t.tagName)
+        }
+        render(view: "create", model: [eateryInstance: new Eatery(params), tagList: tags as JSON])
     }
 
     def save() {
@@ -33,7 +38,7 @@ class EateryController {
         eateryInstance.phone = params['phone']
 
         //assign comma delimited tags
-        eateryInstance.tags = tagService.addTags(params['tags'])
+        eateryInstance.tags = tagService.addTags(params['hidden-tags'])
         //relate eatery and location
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance
@@ -49,10 +54,14 @@ class EateryController {
 
     def show(Long id) {
         def eateryInstance = Eatery.get(id)
+        List<String> tags = new ArrayList<>()
+        for (Tag t in eateryInstance.tags) {
+            tags.add(t.tagName)
+        }
         if (eateryInstance == null) {
             flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
         }
-        render(view: 'show', model: [eateryInstance: eateryInstance])
+        render(view: 'show', model: [eateryInstance: eateryInstance, tagList: tags as JSON])
     }
 
     def edit(Long id) {
@@ -92,8 +101,7 @@ class EateryController {
         locationInstance.state = params['location.state']
         locationInstance.zip = Integer.parseInt(params['location.zip'].toString())
         locationInstance.save()
-
-        eateryInstance.tags = tagService.addTags(params['tags'])
+        eateryInstance.tags = tagService.addTags(params['hidden-tags'])
         //relate eatery and location
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance

@@ -11,8 +11,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" type="text/css">
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-tagmanager.css')}" type="text/css">
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<g:layoutHead/>
+        <g:javascript src="jquery.js"/>
+        <g:javascript src="bootstrap.js"/>
+        <g:javascript src="bootstrap-tagmanager.js"/>
 	</head>
 	<body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +33,5 @@
         <div class="container">
 		    <g:layoutBody/>
         </div>
-		<g:javascript src="jquery.js"/>
-        <g:javascript src="bootstrap.js"/>
 	</body>
 </html>

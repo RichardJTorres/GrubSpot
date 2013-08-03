@@ -57,8 +57,9 @@
                     <div class="control-group">
                         <label class="control-label" for="tags">Tags:</label>
                         <div class="controls">
-                            <g:textField name="tags" value="${eateryInstance?.tags}"/>
+                            <g:textField name="tags" class="tm-input" data-provide="typeahead" data-source='${tagList}' autocomplete="off" value="${eateryInstance?.tags}"/>
                             <p class="help-block"><small>Separate tags with a comma.</small></p>
+                            <div id="tag-container"></div>
                         </div>
                     </div>
                     %{--Form Controls--}%
@@ -69,5 +70,11 @@
             </g:form>
         </div>
     </div>
+<script>
+    $(".tm-input").tagsManager({
+        preventSubmitOnEnter: true,
+        tagsContainer: $('#tag-container')
+    });
+</script>
 </body>
 </html>

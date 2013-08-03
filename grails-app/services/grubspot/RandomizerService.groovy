@@ -9,9 +9,7 @@ class RandomizerService {
                 inList('id', tagList.collect{ it.id })
             }
         }
-        print results
         Collections.shuffle(results)
-        print results
         def eatery = results[0]
 
         return eatery
