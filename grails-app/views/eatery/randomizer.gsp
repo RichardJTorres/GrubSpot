@@ -9,16 +9,15 @@
 <div class="row">
     <div class="span12">
         <g:form action="randomize">
-        <g:each in="${tagList}">
-            <ul class="unstyled">
+            <ul class="unstyled ">
+            <g:each in="${tagList}">
                 <li>
                     <lablel class="checkbox">
                     <g:checkBox name="tagName" value="${it.tagName}"/>${it.tagName.toString()}
                     </lablel>
                 </li>
+            </g:each>
             </ul>
-            </br>
-        </g:each>
         <g:submitButton name="randomize" class="btn btn-primary" value= "Randomize!"/>
         </g:form>
     </div>
