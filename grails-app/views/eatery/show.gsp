@@ -69,7 +69,7 @@
         </div>
 
     </div>
-    <div class="Row">
+    <div class="row">
         <div class="span8">
             <div class="form-actions">
                 <g:hiddenField name="id" value="${eateryInstance?.id}" />

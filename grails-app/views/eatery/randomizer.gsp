@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rich
-  Date: 6/13/13
-  Time: 9:35 AM
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
@@ -17,9 +10,13 @@
     <div class="span12">
         <g:form action="randomize">
         <g:each in="${tagList}">
-            <lablel class="checkbox">
-            <g:checkBox name="tagName" value="${it.tagName}"/>${it.tagName.toString()}
-            </lablel>
+            <ul class="unstyled">
+                <li>
+                    <lablel class="checkbox">
+                    <g:checkBox name="tagName" value="${it.tagName}"/>${it.tagName.toString()}
+                    </lablel>
+                </li>
+            </ul>
             </br>
         </g:each>
         <g:submitButton name="randomize" class="btn btn-primary" value= "Randomize!"/>

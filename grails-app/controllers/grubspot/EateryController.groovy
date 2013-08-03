@@ -4,17 +4,19 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class EateryController {
     RandomizerService randomizerService
+    TagService tagService
+
     def index() {
         redirect(action: "list", params: params)
     }
 
-    def list(){
-        if(!params.max) params.max = 10
-        render (view: "list", model: [eateryList: Eatery.list(params)])
+    def list() {
+        if (!params.max) params.max = 10
+        render(view: "list", model: [eateryList: Eatery.list(params)])
     }
 
     def create() {
-        render (view: "create", model: [eateryInstance: new Eatery(params)])
+        render(view: "create", model: [eateryInstance: new Eatery(params)])
     }
 
     def save() {
@@ -31,23 +33,13 @@ class EateryController {
         eateryInstance.phone = params['phone']
 
         //assign comma delimited tags
-        String tagString = params['tags']
-        String[] tagList = tagString.split(',')
-        List<Tag> tags = new ArrayList<>()
-        for (String t in tagList){
-            t.trim().toLowerCase()
-            tags.add(Tag.findByTagName(t) ?: new Tag(tagName: t).save(flush: true))
-
-        }
-        eateryInstance.tags = tags
-
+        eateryInstance.tags = tagService.addTags(params['tags'])
         //relate eatery and location
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance
 
         //save and handle errors
-        def eaterySuccess = eateryInstance.save()
-        if (!eaterySuccess) {
+        if (!eateryInstance.save(flush: true)) {
             render(view: "create", model: [eateryInstance: eateryInstance])
         } else {
             flash.message = message(code: 'default.created.message', args: [message(code: 'eatery.label'), eateryInstance.name])
@@ -60,12 +52,12 @@ class EateryController {
         if (eateryInstance == null) {
             flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
         }
-        render(view:'show', model: [eateryInstance: eateryInstance])
+        render(view: 'show', model: [eateryInstance: eateryInstance])
     }
 
     def edit(Long id) {
         def eateryInstance = Eatery.get(id)
-        if(!eateryInstance) {
+        if (!eateryInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label'), id])
             redirect(action: "list")
             return
@@ -82,9 +74,9 @@ class EateryController {
         }
 
         if (version != null) {
-            if(eateryInstance.version > version) {
+            if (eateryInstance.version > version) {
                 eateryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                [message(code: 'eatery.label', default: 'Eatery')] as Object[], "Another user has updated this Eatery while you were editing")
+                        [message(code: 'eatery.label', default: 'Eatery')] as Object[], "Another user has updated this Eatery while you were editing")
                 render(view: "edit", model: [eateryInstance: eateryInstance])
                 return
             }
@@ -101,28 +93,17 @@ class EateryController {
         locationInstance.zip = Integer.parseInt(params['location.zip'].toString())
         locationInstance.save()
 
-
-        //assign comma delimited tags
-        String tagString = params['tags']
-        String[] tagList = tagString.split(',')
-        List<Tag> tags = new ArrayList<>()
-        for (String t in tagList){
-            t.trim().toLowerCase()
-            tags.add(Tag.findByTagName(t) ?: new Tag(tagName: t).save(flush: true))
-
-        }
-        eateryInstance.tags = tags
-
+        eateryInstance.tags = tagService.addTags(params['tags'])
         //relate eatery and location
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance
 
         if (!eateryInstance.save()) {
-            render(view:"edit", model: [eateryInstance: eateryInstance])
+            render(view: "edit", model: [eateryInstance: eateryInstance])
             return
         }
 
-        flash.message = message(code:"default.updated.message", args: [message(code: 'eatery.label', default: 'Tag'), eateryInstance.id])
+        flash.message = message(code: "default.updated.message", args: [message(code: 'eatery.label', default: 'Tag'), eateryInstance.id])
         redirect(action: "show", id: eateryInstance.id)
     }
 
@@ -139,7 +120,7 @@ class EateryController {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
             redirect(action: "list")
         }
-        catch(DataIntegrityViolationException e) {
+        catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
             redirect(action: "show", id: id)
         }
@@ -148,11 +129,10 @@ class EateryController {
 
     def randomizer() {
         List<Tag> tagList = Tag.list()
-        render(view:'randomizer', model: [tagList: tagList])
+        render(view: 'randomizer', model: [tagList: tagList])
     }
 
-    def randomize(){
-
+    def randomize() {
         List<String> tagNameList = params.list('tagName')
         List<Tag> tagList = Tag.findAllByTagNameInList(tagNameList)
         if (!tagList) {
