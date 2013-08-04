@@ -147,6 +147,6 @@ class EateryController {
             tagList = Tag.list()
         }
         Eatery randomEatery = randomizerService.getRandomEatery(tagList)
-        redirect(action: "show", id: randomEatery.id)
+        render(view: "_show", model: [eateryInstance: randomEatery])
     }
 }
