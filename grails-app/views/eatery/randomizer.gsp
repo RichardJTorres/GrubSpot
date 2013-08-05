@@ -10,7 +10,7 @@
     <div class="span3">
         <g:formRemote url="[controller: 'eatery', action:'randomize']" name="randomizer" update="results">
             <ul class="unstyled ">
-            <g:each in="${tagList}">
+            <g:each in="${existingTags}">
                 <li>
                     <lablel class="checkbox">
                     <g:checkBox name="tagName" value="${it.tagName}"/>${it.tagName.toString()}

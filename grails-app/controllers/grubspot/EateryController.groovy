@@ -137,7 +137,7 @@ class EateryController {
 
     def randomizer() {
         List<Tag> tagList = Tag.list()
-        render(view: 'randomizer', model: [tagList: tagList])
+        render(view: 'randomizer', model: [existingTags: tagList])
     }
 
     def randomize() {
@@ -147,6 +147,10 @@ class EateryController {
             tagList = Tag.list()
         }
         Eatery randomEatery = randomizerService.getRandomEatery(tagList)
-        render(view: "_show", model: [eateryInstance: randomEatery])
+        List<String> tags = new ArrayList<>()
+        for (Tag t in randomEatery.tags) {
+            tags.add(t.tagName)
+        }
+        render(view: "_show", model: [eateryInstance: randomEatery, tagList: tags as JSON])
     }
 }
