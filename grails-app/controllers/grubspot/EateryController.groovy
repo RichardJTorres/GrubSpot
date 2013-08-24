@@ -11,9 +11,9 @@ class EateryController {
         redirect(action: "list", params: params)
     }
 
-    def list() {
-        if (!params.max) params.max = 10
-        render(view: "list", model: [eateryList: Eatery.list(params)])
+    def list(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        render(view: "list", model: [eateryList: Eatery.list(params), eateryInstanceTotal: Eatery.count()])
     }
 
     def create() {
@@ -30,7 +30,7 @@ class EateryController {
         locationInstance.street = params['location.street']
         locationInstance.city = params['location.city']
         locationInstance.state = params['location.state']
-        locationInstance.zip = Integer.parseInt(params['location.zip'].toString())
+        locationInstance.zip = params['location.zip']
 
         //build an eatery
         Eatery eateryInstance = new Eatery()
@@ -99,7 +99,7 @@ class EateryController {
         locationInstance.street = params['location.street']
         locationInstance.city = params['location.city']
         locationInstance.state = params['location.state']
-        locationInstance.zip = Integer.parseInt(params['location.zip'].toString())
+        locationInstance.zip = params['location.zip']
         locationInstance.save()
         eateryInstance.tags = tagService.addTags(params['hidden-tags'])
         //relate eatery and location

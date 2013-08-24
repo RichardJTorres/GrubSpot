@@ -40,7 +40,7 @@
                             <label for="location.zip">Zip</label>
                             <g:textField class="form-control input-sm" name="location.zip" value="${eateryInstance?.location?.zip}"/>
                         </div>
-                        <p class="help-block"><small>Use two character state code. Ex: CA for California</small></p><
+                        <p class="help-block"><small>Use two character state code. Ex: CA for California</small></p>
                     </div>
                     %{--Tags--}%
                     <div class="form-group">

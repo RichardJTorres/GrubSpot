@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-3">
         <g:formRemote url="[controller: 'eatery', action:'randomize']" name="randomizer" update="results">
-            <ul class="unstyled ">
+            <ul class="list-unstyled ">
             <g:each in="${existingTags}">
                 <li>
                     <lablel class="checkbox">

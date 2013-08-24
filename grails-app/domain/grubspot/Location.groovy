@@ -4,7 +4,7 @@ class Location {
 	String street
 	String city
 	String state
-	Integer zip
+	String zip
 
 	static belongsTo = [eatery: Eatery]
     static constraints = {

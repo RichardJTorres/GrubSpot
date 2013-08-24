@@ -44,7 +44,7 @@
             </tbody>
         </table>
         <div class="pagination">
-            <g:paginate total="${eateryList.size()}" />
+            <g:paginate total="${eateryInstanceTotal}" />
         </div>
 
     </div>
