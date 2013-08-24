@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
         <h2 id="title">${eateryInstance.name}</h2>
     </div>
 </div>
@@ -14,7 +14,7 @@
 </g:if>
 <div class="row">
 
-    <div class="span5">
+    <div class="col-md-5">
         <div class="form-horizontal">
         %{--Eatery Phone--}%
             <g:if test="${eateryInstance.phone}">
@@ -47,7 +47,7 @@
             </g:if>
         </div>
     </div>
-    <div class="span3">
+    <div class="col-md-3">
         <div id="map-canvas"></div>
     </div>
 </div>

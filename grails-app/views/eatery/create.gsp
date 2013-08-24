@@ -6,8 +6,8 @@
 </head>
 <body>
     <div class="row">
-        <div class="span12">
-            <g:form action="save" class="form-horizontal">
+        <div class="col-md-12">
+            <g:form action="save" class="form-vertical">
                 <fieldset>
                     <legend>Create an Eatery</legend>
                     %{--Eatery Name--}%

@@ -23,10 +23,17 @@
 	</head>
 	<body>
         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" href="/GrubSpot">Place Pick</a>
-                    <ul class="nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Place Pick</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
                         <li><g:link controller="eatery" action="list">Eateries</g:link></li>
                         <li><g:link controller="eatery" action="randomizer">Randomizer</g:link></li>
                     </ul>

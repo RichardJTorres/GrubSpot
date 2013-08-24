@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="row">
-    <div class="span8">
+    <div class="col-md-8">
         <h1>Eatery List</h1>
         <g:if test="${flash.message}">
             <div class="alert">
@@ -16,7 +16,7 @@
         <div class="btn-toolbar">
             <g:link class="btn btn-small btn-primary" action="create">New Eatery</g:link>
         </div>
-        <table class="table">
+        <table class="table table-condensed">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -43,6 +43,9 @@
             </g:each>
             </tbody>
         </table>
+        <div class="pagination">
+            <g:paginate total="${eateryList.size()}" />
+        </div>
 
     </div>
 </div>
