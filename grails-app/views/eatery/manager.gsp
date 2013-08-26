@@ -20,11 +20,11 @@
         </div>
     </div>
     <div class="col-md-8">
-        <div class="panel panel-default">
+        <div id="hidden-panel" class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Show Eatery<a href="#" class="pull-right" data-toggle="collapse" data-target="#panel-show"><span id="panel-show-toolbar" class="glyphicon glyphicon-plus"></span></a></h3>
+                <h3 class="panel-title">Show Eatery<a href="#" class="pull-right" data-toggle="collapse" data-target="#panel-show"><span id="panel-show-toolbar" class="glyphicon glyphicon-minus"></span></a></h3>
             </div>
-            <div id="panel-show" class="panel-body collapse">
+            <div id="panel-show" class="panel-body in">
                 <g:render template="show"/>
             </div>
         </div>
@@ -40,11 +40,12 @@
 </div>
 <script>
     var saveSuccess = function() {
+        //activate show panel
+        $('#hidden-panel').show();
+        //reset the form data
         $("#save-form")[0].reset();
-        $("div#panel-show").toggleClass("collapse in");
         $("div#tag-container").html("");
-        $("input[type='hidden'][name='hidden-tags']").val("")
-        $("span#panel-show-toolbar").toggleClass("glyphicon-plus glyphicon-minus")
+        $("input[type='hidden'][name='hidden-tags']").val("");
         reloadList();
     };
 
@@ -62,6 +63,7 @@
         $("span.glyphicon").click(function(){
             $(this).toggleClass("glyphicon-plus glyphicon-minus");
         });
+        $('#hidden-panel').hide();
     });
 </script>
 
