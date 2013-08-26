@@ -44,8 +44,12 @@
         $("div#panel-show").toggleClass("collapse in");
         $("div#tag-container").html("");
         $("input[type='hidden'][name='hidden-tags']").val("")
-        $("#panel-list").load("/GrubSpot/eatery/list");
         $("span#panel-show-toolbar").toggleClass("glyphicon-plus glyphicon-minus")
+        reloadList();
+    };
+
+    var reloadList = function() {
+      $('#panel-list').load("/GrubSpot/eatery/list");
     };
 
     $(document).ready(function(){

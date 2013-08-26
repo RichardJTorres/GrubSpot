@@ -123,18 +123,17 @@ class EateryController {
         def eateryInstance = Eatery.get(id)
         if (!eateryInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
-            redirect(action: "list")
-            return
+            render(view: "_list")
         }
 
         try {
             eateryInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
-            redirect(action: "list")
+            render(view: "_list")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
-            redirect(action: "show", id: id)
+            render(view: "_list", model: [eateryList: Eatery.list()])
         }
     }
 

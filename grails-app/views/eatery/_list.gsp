@@ -20,8 +20,8 @@
                             ${t.tagName} &nbsp
                         </g:each>
                     </td>
-                    <td><g:link action="edit" id="eatery_${eateryInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link>
-                        <g:link action="delete" id="${eateryInstance.id}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" ><span class="glyphicon glyphicon-remove"></span></g:link>
+                    <td><g:remoteLink action="edit" id="${eateryInstance.id}" ><span class="glyphicon glyphicon-pencil"></span></g:remoteLink>
+                        <g:remoteLink action="delete" id="${eateryInstance.id}" update="panel-list" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" ><span class="glyphicon glyphicon-trash"></span></g:remoteLink>
                     </td>
                 </tr>
             </g:each>
