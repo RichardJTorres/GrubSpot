@@ -33,7 +33,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><g:link controller="eatery" action="list">Eateries</g:link></li>
+                        <li><g:link controller="eatery" action="index">Eateries</g:link></li>
                         <li><g:link controller="eatery" action="randomizer">Randomizer</g:link></li>
                     </ul>
                 </div>

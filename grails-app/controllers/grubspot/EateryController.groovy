@@ -8,12 +8,16 @@ class EateryController {
     TagService tagService
 
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "manager")
     }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        render(view: "list", model: [eateryList: Eatery.list(params), eateryInstanceTotal: Eatery.count()])
+    def manager() {
+        render(view: "manager", model:[eateryList: Eatery.list()])
+    }
+
+    def list() {
+        //params.max = Math.min(max ?: 10, 100)
+        render(view: "_list", model: [eateryList: Eatery.list(), eateryInstanceTotal: Eatery.count()])
     }
 
     def create() {
@@ -21,7 +25,7 @@ class EateryController {
         for (Tag t in Tag.list()) {
             tags.add(t.tagName)
         }
-        render(view: "create", model: [eateryInstance: new Eatery(params), tagList: tags as JSON])
+        render(view: "_create", model: [eateryInstance: new Eatery(params), tagList: tags as JSON])
     }
 
     def save() {
@@ -45,10 +49,10 @@ class EateryController {
 
         //save and handle errors
         if (!eateryInstance.save(flush: true)) {
-            render(view: "create", model: [eateryInstance: eateryInstance])
+            flash.error = message(code: 'eatery.save.failed')
         } else {
             flash.message = message(code: 'default.created.message', args: [message(code: 'eatery.label'), eateryInstance.name])
-            redirect(action: "show", id: eateryInstance.id)
+            render(view: "_show", model: [eateryInstance: eateryInstance])
         }
     }
 
@@ -61,7 +65,7 @@ class EateryController {
         if (eateryInstance == null) {
             flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
         }
-        render(view: 'show', model: [eateryInstance: eateryInstance, tagList: tags as JSON])
+        render(view: '_show', model: [eateryInstance: eateryInstance, tagList: tags as JSON])
     }
 
     def edit(Long id) {
