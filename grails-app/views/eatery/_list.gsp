@@ -12,7 +12,7 @@
             <tbody>
             <g:each in="${eateryList}" var="eateryInstance">
                 <tr>
-                    <td><g:remoteLink action="show" id="${eateryInstance.id}" update="#panel-show">${eateryInstance.name}</g:remoteLink></td>
+                    <td><g:remoteLink onSuccess="showPane()" action="show" id="${eateryInstance.id}" update="panel-show" >${eateryInstance.name}</g:remoteLink></td>
                     <td>${eateryInstance.location}</td>
                     <td>${eateryInstance.phone}</td>
                     <td>
@@ -20,7 +20,7 @@
                             ${t.tagName} &nbsp
                         </g:each>
                     </td>
-                    <td><g:remoteLink action="edit" id="${eateryInstance.id}" ><span class="glyphicon glyphicon-pencil"></span></g:remoteLink>
+                    <td><g:remoteLink action="edit" id="${eateryInstance.id}" update="panel-form"><span class="glyphicon glyphicon-pencil"></span></g:remoteLink>
                         <g:remoteLink action="delete" id="${eateryInstance.id}" update="panel-list" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" ><span class="glyphicon glyphicon-trash"></span></g:remoteLink>
                     </td>
                 </tr>

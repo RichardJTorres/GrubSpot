@@ -1,3 +1,8 @@
+
+<div class="panel-heading">
+    <h3 class="panel-title">Create an Eatery<a href="#" class="pull-right" data-toggle="collapse" data-target="#panel-create"><span class="glyphicon glyphicon-minus "></span></a></h3>
+</div>
+<div id="panel-create" class="panel-body in">
 <div class="col-md-10">
 <g:formRemote id="save-form"
               update="panel-show"
@@ -51,4 +56,5 @@
         </div>
     </fieldset>
 </g:formRemote>
+</div>
 </div>

@@ -7,16 +7,9 @@
 </head>
 <body>
 <div class="row">
-
     <div class="col-md-4">
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Create an Eatery<a href="#" class="pull-right" data-toggle="collapse" data-target="#panel-create"><span class="glyphicon glyphicon-minus "></span></a></h3>
-            </div>
-            <div id="panel-create" class="panel-body in">
-                <g:render template="create"/>
-            </div>
+        <div id="panel-form" class="panel panel-default">
+            <g:render template="create"/>
         </div>
     </div>
     <div class="col-md-8">
@@ -40,17 +33,20 @@
 </div>
 <script>
     var saveSuccess = function() {
-        //activate show panel
-        $('#hidden-panel').show();
         //reset the form data
         $("#save-form")[0].reset();
         $("div#tag-container").html("");
         $("input[type='hidden'][name='hidden-tags']").val("");
+        showPane();
         reloadList();
     };
 
+    var showPane = function() {
+        $('#hidden-panel').show();
+    }
+
     var reloadList = function() {
-      $('#panel-list').load("/GrubSpot/eatery/list");
+        $('#panel-list').load("/GrubSpot/eatery/list");
     };
 
     $(document).ready(function(){

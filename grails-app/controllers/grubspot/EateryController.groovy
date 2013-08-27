@@ -72,10 +72,9 @@ class EateryController {
         def eateryInstance = Eatery.get(id)
         if (!eateryInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'eatery.label'), id])
-            redirect(action: "list")
-            return
+            render(view: "_list", model: [eateryList: Eatery.list()])
         }
-        [eateryInstance: eateryInstance]
+        render(view: '_edit', model: [eateryInstance: eateryInstance])
     }
 
     def update(Long id, Long version) {
@@ -90,7 +89,7 @@ class EateryController {
             if (eateryInstance.version > version) {
                 eateryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'eatery.label', default: 'Eatery')] as Object[], "Another user has updated this Eatery while you were editing")
-                render(view: "edit", model: [eateryInstance: eateryInstance])
+                render(view: "_edit", model: [eateryInstance: eateryInstance])
                 return
             }
         }
@@ -110,13 +109,12 @@ class EateryController {
         eateryInstance.location = locationInstance
         locationInstance.eatery = eateryInstance
 
-        if (!eateryInstance.save()) {
-            render(view: "edit", model: [eateryInstance: eateryInstance])
-            return
+        if (!eateryInstance.save(flush: true)) {
+            render(view: "_edit", model: [eateryInstance: eateryInstance])
         }
 
         flash.message = message(code: "default.updated.message", args: [message(code: 'eatery.label', default: 'Tag'), eateryInstance.id])
-        redirect(action: "show", id: eateryInstance.id)
+        render(view: "_create")
     }
 
     def delete(Long id) {
@@ -129,7 +127,7 @@ class EateryController {
         try {
             eateryInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
-            render(view: "_list")
+            render(view: "_list", model: [eateryList: Eatery.list()])
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'eatery.label', default: 'Eatery'), id])
