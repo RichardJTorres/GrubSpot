@@ -30,7 +30,7 @@
                         <p>${eateryInstance?.phone}</p>
             </g:if>
         %{--Eatery Location--}%
-            <g:if test="${eateryInstance?.location}">
+            <g:if test="${eateryInstance?.location?.street != ""}">
             Location:
             <p>${eateryInstance?.location?.encodeAsHTML()}<p>
             </g:if>
