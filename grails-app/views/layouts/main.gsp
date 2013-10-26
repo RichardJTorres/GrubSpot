@@ -42,5 +42,6 @@
         <div class="container">
 		    <g:layoutBody/>
         </div>
+        <g:javascript src="application.js"/>
 	</body>
 </html>

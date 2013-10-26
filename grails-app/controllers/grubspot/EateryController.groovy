@@ -58,12 +58,12 @@ class EateryController {
 
     def show(Long id) {
         def eateryInstance = Eatery.get(id)
+        if (eateryInstance == null) {
+            flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
+        }
         List<String> tags = new ArrayList<>()
         for (Tag t in eateryInstance.tags) {
             tags.add(t.tagName)
-        }
-        if (eateryInstance == null) {
-            flash.message = message(code: 'grubspot.show.not.found', args: [eateryInstance.name])
         }
         render(view: '_show', model: [eateryInstance: eateryInstance, tagList: tags as JSON])
     }
