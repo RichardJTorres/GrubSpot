@@ -11,17 +11,8 @@ import org.junit.*
 @TestFor(EateryController)
 class EateryControllerTests {
 
-    void testTags() {
-        def eateryInstance = new Eatery()
-        eateryInstance.name = 'oinkster'
-        assert eateryInstance.name == 'oinkster'
-        def tagString = "burgers, chicken, call"
-        def tagList = tagString.split(',')
-        println(tagList)
-        for (t in tagList){
-            t.trim()
-            eateryInstance.tags = new Tag(tagName: t)
-        }
-
+    void testIndex() {
+        controller.index()
+        assertEquals response.redirectedUrl, '/eatery/manager'
     }
 }
