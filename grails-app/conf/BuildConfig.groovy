@@ -10,6 +10,10 @@ grails.project.war.file = "target/${appName}-${appVersion}.war"
 //grails.project.fork = [
 //   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
 //]
+coverage {
+    enabledByDefault = false
+    xml = true
+}
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
