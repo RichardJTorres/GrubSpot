@@ -13,6 +13,6 @@ class EateryControllerTests {
 
     void testIndex() {
         controller.index()
-        assertEquals response.redirectedUrl, '/eatery/something'
+        assertEquals response.redirectedUrl, '/eatery/manager'
     }
 }
