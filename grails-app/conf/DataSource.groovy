@@ -32,7 +32,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost:3306/grubspot_prod?autoreconnect=true"
+            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             pooled = true
             properties {
                maxActive = -1
